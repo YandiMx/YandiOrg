@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yandi| Ecosistema Organizacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!--
+    Palette Name: Siper & Yandi Brand DNA (2026 Updated)
+    Primary: #1B2745 (Azul Marino - Tecnología y Estructura)
+    Secondary: #EA791E (Naranja Vibrante - Agilidad y Acción)
+    Neutral: #878A8D (Gris Medio - Equilibrio)
+    
+    Plan Summary:
+    1. Visual Identity: Header optimized for 2026 branding.
+    2. Robust Tree Layout: Uses a column-based alignment to ensure the "Servidren" branch is perfectly visible.
+    3. Indicators: Clear visual distinction between hierarchy and consulting roles.
+    4. Methodology: CSS-only connectors, NO SVG, NO Mermaid JS.
+    -->
+    <style>
+        :root {
+            --brand-navy: #1B2745;
+            --brand-orange: #EA791E;
+            --brand-gray: #878A8D;
+            --bg-light: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--brand-navy);
+            overflow-x: hidden;
+        }
+
+        /* Tree System */
+        .org-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            min-width: fit-content;
+        }
+
+        .node-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(27, 39, 69, 0.1);
+            padding: 1rem 1.5rem;
+            width: 240px;
+            text-align: center;
+            border-bottom: 5px solid var(--brand-navy);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .node-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(234, 121, 30, 0.2);
+        }
+
+        .node-card.orange { border-bottom-color: var(--brand-orange); }
+        .node-card.consultant { 
+            border-bottom-color: var(--brand-gray); 
+            border-bottom-style: dashed;
+            background-color: #fcfcfc;
+        }
+
+        /* Logic Connectors */
+        .connector-v {
+            width: 2px;
+            height: 40px;
+            background: #CBD5E1;
+        }
+
+        .connector-h {
+            height: 2px;
+            background: #CBD5E1;
+            width: 100%;
+            position: relative;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 300px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Branding Header -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-[#1B2745] rounded-xl flex items-center justify-center shadow-lg shadow-navy-500/20">
+                    <div class="w-4 h-4 bg-[#EA791E] rounded-sm transform rotate-45"></div>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tighter">YANDI & SIPER</h1>
+                    <p class="text-[9px] font-black text-[#878A8D] uppercase tracking-widest">Ecosystem 2026</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-4">
+                <div class="flex items-center gap-1.5 px-3 py-1 bg-slate-50 border border-slate-200 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-[#1B2745]"></span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase">Estructura</span>
+                </div>
+                <div class="flex items-center gap-1.5 px-3 py-1 bg-slate-50 border border-slate-200 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-[#EA791E]"></span>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase">Acción</span>
+                </div>
+                <div class="text-[10px] font-black text-slate-300 uppercase ml-4">Versión 2.0.26</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+        
+        <!-- Hero -->
+        <header class="mb-12 text-center md:text-left">
+            <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">DNA <span class="text-[#EA791E]">Organizacional</span></h2>
+            <p class="text-[#878A8D] max-w-2xl leading-relaxed">
+                Mapa estratégico de reporte y colaboración. Optimizado para el despliegue tecnológico y la agilidad de producto en el ciclo fiscal **2026**.
+            </p>
+        </header>
+
+        <!-- ORGANIGRAMA TREE -->
+        <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-x-auto scrollbar-hide mb-20 p-8">
+            <div class="org-container">
+                
+                <!-- NIVEL 1: CEO -->
+                <div class="flex flex-col items-center">
+                    <div class="node-card">
+                        <span class="text-[9px] font-black text-[#1B2745] uppercase tracking-wider block mb-1">CEO</span>
+                        <h3 class="text-md font-extrabold">Alejandro Campero</h3>
+                        <p class="text-xs text-[#878A8D]">Servidren & Yandi</p>
+                    </div>
+                    <div class="connector-v"></div>
+                </div>
+
+                <!-- NIVEL 2: BRANCHING -->
+                <div class="w-[600px] flex flex-col items-center">
+                    <div class="connector-h">
+                        <div class="absolute left-0 top-[-3px] w-2 h-2 rounded-full bg-slate-300"></div>
+                        <div class="absolute right-0 top-[-3px] w-2 h-2 rounded-full bg-slate-300"></div>
+                    </div>
+                    <div class="flex justify-between w-full pt-10">
+                        
+                        <!-- Rama Servidren -->
+                        <div class="flex flex-col items-center">
+                            <div class="absolute top-0 w-0.5 h-10 bg-slate-200"></div>
+                            <div class="node-card orange">
+                                <span class="text-[9px] font-black text-[#EA791E] uppercase tracking-wider block mb-1">Product Owner & CTO</span>
+                                <h3 class="text-md font-extrabold">Monserrat Arroyo</h3>
+                                <p class="text-xs text-[#878A8D]">Servidren</p>
+                            </div>
+                        </div>
+
+                        <!-- Rama CTPO -->
+                        <div class="flex flex-col items-center">
+                            <div class="absolute top-0 w-0.5 h-10 bg-slate-200"></div>
+                            <div class="node-card">
+                                <span class="text-[9px] font-black text-[#1B2745] uppercase tracking-wider block mb-1">CTPO</span>
+                                <h3 class="text-md font-extrabold">Raymundo Juárez</h3>
+                                <p class="text-xs text-[#878A8D]">Yandi</p>
+                            </div>
+                            <div class="connector-v"></div>
+
+                            <!-- NIVEL 3: REPORTS CTPO -->
+                            <div class="w-[800px] flex flex-col items-center">
+                                <div class="connector-h"></div>
+                                <div class="flex justify-between w-full pt-10">
+                                    
+                                    <!-- PO Yandi -->
+                                    <div class="flex flex-col items-center">
+                                        <div class="absolute top-0 w-0.5 h-10 bg-slate-200"></div>
+                                        <div class="node-card orange">
+                                            <span class="text-[9px] font-black text-[#EA791E] uppercase tracking-wider block mb-1">Product Owner</span>
+                                            <h3 class="text-md font-extrabold">Miguel Angel Garcia</h3>
+                                            <p class="text-xs text-[#878A8D]">Yandi</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tech Lead -->
+                                    <div class="flex flex-col items-center">
+                                        <div class="absolute top-0 w-0.5 h-10 bg-slate-200"></div>
+                                        <div class="node-card">
+                                            <span class="text-[9px] font-black text-[#1B2745] uppercase tracking-wider block mb-1">Tech Lead</span>
+                                            <h3 class="text-md font-extrabold">Fabiola Monfil</h3>
+                                            <p class="text-xs text-[#878A8D]">Yandi</p>
+                                        </div>
+                                        <div class="connector-v"></div>
+
+                                        <!-- NIVEL 4: ENGINEERING -->
+                                        <div class="w-[500px] flex flex-col items-center">
+                                            <div class="connector-h"></div>
+                                            <div class="flex justify-between w-full pt-10">
+                                                <div class="node-card w-40 p-3">
+                                                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Engineer</span>
+                                                    <h4 class="text-xs font-bold">Freddy Díaz</h4>
+                                                </div>
+                                                <div class="node-card w-40 p-3">
+                                                    <span class="text-[8px] font-bold text-slate-400 uppercase block">Engineer</span>
+                                                    <h4 class="text-xs font-bold">Diana L. Flores</h4>
+                                                </div>
+                                                <div class="node-card consultant w-40 p-3">
+                                                    <span class="text-[8px] font-bold text-[#878A8D] uppercase block">Arch. Consult</span>
+                                                    <h4 class="text-xs font-bold">Ileana Aldama</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- UX Consultant -->
+                                    <div class="flex flex-col items-center">
+                                        <div class="absolute top-0 w-0.5 h-10 bg-slate-200"></div>
+                                        <div class="node-card consultant">
+                                            <span class="text-[9px] font-black text-[#878A8D] uppercase tracking-wider block mb-1">UX Consultant</span>
+                                            <h3 class="text-md font-extrabold">Azrael</h3>
+                                            <p class="text-[10px] text-[#878A8D] italic">Línea Punteada</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS SECTION -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Talent Distribution -->
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                <h3 class="text-xl font-black mb-6 text-[#1B2745]">Distribución de Fuerza 2026</h3>
+                <div class="chart-wrapper">
+                    <canvas id="talentChart"></canvas>
+                </div>
+                <div class="mt-6 flex flex-wrap justify-center gap-4">
+                    <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-[#1B2745]"></span> <span class="text-[10px] font-bold uppercase text-slate-500">Dirección</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-[#EA791E]"></span> <span class="text-[10px] font-bold uppercase text-slate-500">Producto</span></div>
+                    <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-[#CBD5E1]"></span> <span class="text-[10px] font-bold uppercase text-slate-500">Ingeniería</span></div>
+                </div>
+            </div>
+
+            <!-- Management Capacity -->
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                <h3 class="text-xl font-black mb-6 text-[#1B2745]">Carga de Liderazgo (Reports)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="managementChart"></canvas>
+                </div>
+                <div class="mt-8 p-4 bg-[#1B2745] rounded-xl flex items-center gap-4">
+                    <span class="text-[#EA791E] font-black text-2xl">!</span>
+                    <p class="text-[10px] text-white/80 font-bold uppercase tracking-widest leading-loose">
+                        Estructura horizontal optimizada para la toma de decisiones ágil y renovación continua.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-20 py-10 border-t border-slate-100 text-center">
+            <p class="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em]">Siper & Yandi DNA Ecosystem © 2026</p>
+            <div class="mt-4 flex justify-center gap-2">
+                <div class="w-1 h-1 rounded-full bg-[#1B2745]"></div>
+                <div class="w-1 h-1 rounded-full bg-[#EA791E]"></div>
+                <div class="w-1 h-1 rounded-full bg-[#878A8D]"></div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const wrapLabel = (label) => {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(w => {
+                if ((currentLine + w).length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = w + ' ';
+                } else {
+                    currentLine += w + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const globalTooltipConfig = {
+            backgroundColor: '#1B2745',
+            titleFont: { size: 14, weight: 'bold', family: 'Plus Jakarta Sans' },
+            bodyFont: { size: 13, family: 'Plus Jakarta Sans' },
+            padding: 12,
+            cornerRadius: 10,
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // Distribution Chart
+        const talentCtx = document.getElementById('talentChart').getContext('2d');
+        new Chart(talentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ejecución C-Suite', 'Gestión de Producto', 'Ingeniería Core', 'Consultoría Estratégica'].map(wrapLabel),
+                datasets: [{
+                    data: [2, 2, 3, 2],
+                    backgroundColor: ['#1B2745', '#EA791E', '#CBD5E1', '#878A8D'],
+                    borderWidth: 0,
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: globalTooltipConfig
+                }
+            }
+        });
+
+        // Span Chart
+        const managementCtx = document.getElementById('managementChart').getContext('2d');
+        new Chart(managementCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Alejandro (CEO)', 'Raymundo (CTPO)', 'Fabiola (Lead)'].map(wrapLabel),
+                datasets: [{
+                    label: 'Reportes',
+                    data: [2, 3, 3],
+                    backgroundColor: '#EA791E',
+                    borderRadius: 8,
+                    barThickness: 40
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        max: 5,
+                        grid: { color: '#F1F5F9' },
+                        border: { display: false },
+                        ticks: { stepSize: 1, font: { weight: 'bold' } }
+                    },
+                    x: { 
+                        grid: { display: false },
+                        border: { display: false },
+                        ticks: { font: { weight: 'bold', size: 11 } }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: globalTooltipConfig
+                }
+            }
+        });
+    </script>
+</body>
+</html>
